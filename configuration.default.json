@@ -2,6 +2,7 @@
 	"server":{
 		"host":"localhost",
 		"username":"root",
+		"path":"/home/www/reborn",
 		"password":"pass",
 		"port":22
 	},

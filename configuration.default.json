@@ -1,0 +1,15 @@
+{
+	"server":{
+		"host":"localhost",
+		"username":"root",
+		"password":"pass",
+		"port":22
+	},
+	"repository":{
+		"uri":"https://github.com/Leoche/myrepo",
+		"branches":{
+			"production":"master",
+			"development":"dev"
+		}
+	}
+}

@@ -7,6 +7,7 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     rename = require('gulp-rename');
     pug = require('gulp-pug');
+    var composer = require("gulp-composer");
     // plugins = require('gulp-load-plugins')();
 
 // Define base folders
@@ -94,6 +95,10 @@ gulp.task('browserSync', function() {
       baseDir: dist
     },
   })
+})
+
+gulp.task('installLumen', function(){
+  composer("composer create-project --prefer-dist laravel/lumen blog");
 })
 
 // Default Task

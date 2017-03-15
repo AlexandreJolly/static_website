@@ -12,5 +12,6 @@
 			"production":"master",
 			"development":"dev"
 		}
-	}
+	},
+	"test":"d"
 }

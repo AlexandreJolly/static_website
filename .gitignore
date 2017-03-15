@@ -1,5 +1,7 @@
 .DS/Store
 .sass-cache
-dist
+dist/.env
 node_modules
 configuration.json
+dist/vendor
+dist/storage

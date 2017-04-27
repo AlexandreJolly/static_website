@@ -1,11 +1,27 @@
-doctype html
-html(lang='en')
-  head
-    title static_website
-    meta(name="viewport", content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui")
-    link(rel="stylesheet", href="css/main.css")
-  body
-    div.container
-      h1 Lorem ipsum
-      p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      p Ahah3
+extends templates/default.pug
+
+block activeLink
+  -var active = 'Accueil';
+
+block content
+  include ./layouts/jumbotron.pug
+  
+  .row.mb-4
+    .col-lg-6
+      h4 Subheading
+      p
+        | Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.
+      h4 Subheading
+      p
+        | Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
+      h4 Subheading
+      p Maecenas sed diam eget risus varius blandit sit amet non magna.
+    .col-lg-6
+      h4 Subheading
+      p
+        | Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.
+      h4 Subheading
+      p
+        | Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
+      h4 Subheading
+      p Maecenas sed diam eget risus varius blandit sit amet non magna.

@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    include ../includes/metas.pug
+    include ../includes/stylesheets.pug
+
+  body
+    block activeLink
+      -var active = 'Accueil'; // page active par défaut
+    
+    -var menu = { 'Accueil': 'index.html', 'Test': 'test.html'};
+    
+    .container
+      include ../layouts/header.pug
+      
+      block content
+        
+      include ../layouts/footer.pug
+
+    //- Import scripts
+    include ../includes/scripts.pug

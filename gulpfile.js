@@ -8,11 +8,11 @@ var gulp = require('gulp'),
     rename = require('gulp-rename'),
     pug = require('gulp-pug'),
     del = require('del'),
-    watch = require('gulp-watch'),
     imagemin = require('gulp-imagemin'),
     notify = require('gulp-notify'),
     cache = require('gulp-cache'),
-    plumber = require('gulp-plumber');
+    plumber = require('gulp-plumber'),
+    watch = require('gulp-watch');
 
 // Define base folders
 var src = 'src/',
@@ -44,20 +44,21 @@ gulp.task('scripts', ['lint', 'copy:vendors'], function() {
     .pipe(uglify())
     .pipe(gulp.dest(dist + 'js'))
     .pipe(browserSync.stream())
-    .pipe(notify({ message: 'Scripts task complete' }))
 });
 
 gulp.task('pug', function() {
-  return gulp.src(src + 'views/**/*.pug')
+  return gulp.src(src + 'views/*.pug')
     .pipe(plumber())
     .pipe(pug())
     .pipe(gulp.dest(dist))
-    .pipe(browserSync.stream())
+    .pipe(browserSync.reload({
+      stream: true
+    }))
 });
 
 // Copy vendors/libs
 gulp.task('copy:vendors', function() {
-  return gulp.src(src + 'assets/javascripts/vendors/**/*.js')
+  return gulp.src([src + 'assets/javascripts/vendors/**/*.js', 'node_modules/bootstrap/dist/js/**/*.js', 'node_modules/tether/dist/js/**/*.js'])
     .pipe(uglify())
     .pipe(gulp.dest(dist + 'js/vendors'))
     .pipe(browserSync.stream())
@@ -66,10 +67,8 @@ gulp.task('copy:vendors', function() {
 // Copy images
 gulp.task('copy:images', function() {
   return gulp.src(src + 'assets/images/**/*.{png,jpg,jpeg,gif,svg}')
-    .pipe(cache(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true })))
     .pipe(gulp.dest(dist + 'img'))
     .pipe(browserSync.stream())
-    .pipe(notify({ message: 'Images task complete' }))
 });
 
 // Copy videos
@@ -95,18 +94,32 @@ gulp.task('copy:fonts', function() {
 
 // Clean folders
 gulp.task('clean', function() {
-  return del([dist + 'css', dist + 'js', dist + 'img', dist + 'videos'])
+  return del.sync([dist + 'css/**/*', dist + 'js/**/*', dist + 'img/**/*', dist + 'videos/**/*'])
 });
 
 // Watch Files For Changes
-gulp.task('watch', ['clean', 'build', 'browserSync'], function() {
-  gulp.watch('./' + src + 'assets/javascripts/**/*.js', ['scripts']);
-  gulp.watch('./' + src + 'assets/stylesheets/**/*.scss', ['sass']);
-  gulp.watch('./' + src + 'assets/images/**/*.{png,jpg,jpeg,gif,svg}', ['copy:images']);
-  gulp.watch('./' + src + 'assets/fonts/**/*.{ttf,woff,eof,svg}', ['copy:fonts']);
-  gulp.watch('./' + src + 'assets/videos/**/*.{mp4,mov}', ['copy:videos']);
-  gulp.watch('./' + src + 'assets/videos/subtitles/**/*.vtt', ['copy:subtitles']);
-  gulp.watch('./' + src + 'views/**/*.pug', ['pug']);
+gulp.task('watch', ['clean', 'build', 'browserSync'], function () {
+  watch('src/assets/stylesheets/**/*.scss', function() {
+    gulp.start('sass');
+  });
+  watch('src/assets/javascripts/**/*.js', function() {
+    gulp.start('scripts');
+  });
+  watch('src/assets/images/**/*', function() {
+    gulp.start('copy:images');
+  });
+  watch('src/assets/fonts/**/*', function() {
+    gulp.start('copy:fonts');
+  });
+  watch('src/assets/videos/**/*', function() {
+    gulp.start('copy:videos');
+  });
+  watch('src/assets/videos/subtitles/**/*', function() {
+    gulp.start('copy:subtitles');
+  });
+  watch('src/views/**/*.pug', function() {
+    gulp.start('pug');
+  });
 });
 
 // Sync Browser on Change
@@ -139,7 +152,7 @@ gulp.task('browserSync', function() {
     // Inject CSS changes or just do a page refresh
     injectChanges: true,
     // The small pop-over notifications in the browser are not always needed/wanted.
-    notify: true,
+    notify: false,
     // Change the console logging prefix.
     // Useful if you're creating your own project based on Browsersync
     logPrefix: "static_website",
@@ -152,5 +165,5 @@ gulp.task('browserSync', function() {
 
 // Default Task
 gulp.task('build', ['pug', 'sass', 'scripts', 'copy']);
-gulp.task('copy', ['copy:images', 'copy:videos', 'copy:subtitles', 'copy:fonts']);
+gulp.task('copy', ['clean', 'copy:images', 'copy:videos', 'copy:subtitles', 'copy:fonts']);
 gulp.task('default', ['watch']);

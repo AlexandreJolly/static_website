@@ -6,6 +6,7 @@ body {
     background-color: $background-color;
     font-family: $font-family-base;
     font-size: 1rem;
+    color: $gray-800;
     @include font-smoothing();
 }
 
@@ -24,7 +25,7 @@ a:focus {
 
 h1, h2, h3, h4, h5, h6 {
     font-family: $headings-font;
-    color: $brand-primary;
+    color: $gray-800;
     margin: 0;
 }
 

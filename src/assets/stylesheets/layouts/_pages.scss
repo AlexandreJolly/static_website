@@ -1,0 +1,22 @@
+.page {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: auto;
+  min-height: calc(100vh - 4rem);
+  margin: 0 0 4rem;
+  padding: 4rem 0;
+
+  &.is-hidden {
+    display: none;
+  }
+}
+
+.page-title {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  margin: 0 0 2.5rem;
+  color: inherit;
+}

@@ -56,6 +56,14 @@ gulp.task('pug', function() {
     }))
 });
 
+gulp.task('html', function() {
+  return gulp.src([src + 'views/*.html'])
+    .pipe(gulp.dest(dist))
+    .pipe(browserSync.reload({
+      stream: true
+    }))
+});
+
 // Copy vendors/libs
 gulp.task('copy:vendors', function() {
   return gulp.src([src + 'assets/javascripts/vendors/**/*.js', 'node_modules/bootstrap/dist/js/**/*.js', 'node_modules/tether/dist/js/**/*.js'])

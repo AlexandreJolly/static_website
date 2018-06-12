@@ -10,8 +10,18 @@ $black:                     #000000;
 // Brand colors
 // -------------------------------------
 
+$brand-red:                 #E8516D;
+$brand-yellow:              #FFCC44;
+$brand-blue:                #0083C6;
+$brand-orange:              #F19569;
+$brand-cyan:                #4DBBC4;
+$brand-green:               #41B18D;
+
+$brand-purple:              #9D51E8;
+$brand-pink:                #DA51E8;
+
 $brand-primary:             #202545;
-$brand-secondary:           #377AF4;
+$brand-secondary:           $brand-blue;
 
 $background-color:          $white;
 $link-color:                $brand-secondary;
@@ -22,7 +32,7 @@ $link-hover-color:          $brand-secondary;
 // Fonts
 // -------------------------------------
 
-$brand-font:                Roboto, sans-serif;
+$brand-font:                Source Sans Pro, sans-serif;
 $headings-font:             $brand-font;
 $font-family-base:          Source Sans Pro, sans-serif;
 $icons-font:                Material Icons;
